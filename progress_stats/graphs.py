@@ -141,52 +141,52 @@ def _graph(self, id, data, conf={},
 
         #conf['legend'] = dict(show=False)
     return (
-"""
-<table cellpadding=0 cellspacing=10>
-<tr>
+        """
+        <table cellpadding=0 cellspacing=10>
+        <tr>
 
-<td><div style="width: 150px; text-align: center; position:absolute;
- -webkit-transform: rotate(-90deg) translateY(-85px);
-font-weight: bold;
-">%(ylab)s</div></td>
+        <td><div style="width: 150px; text-align: center; position:absolute;
+         -webkit-transform: rotate(-90deg) translateY(-85px);
+        font-weight: bold;
+        ">%(ylab)s</div></td>
 
-<td>
-<center><div id=%(id)sLegend></div></center>
-<div id="%(id)s" style="width:%(w)spx; height:%(h)spx;"></div>
-</td>
+        <td>
+        <center><div id=%(id)sLegend></div></center>
+        <div id="%(id)s" style="width:%(w)spx; height:%(h)spx;"></div>
+        </td>
 
-<td><div style="width: 150px; text-align: center; position:absolute;
- -webkit-transform: rotate(90deg) translateY(65px);
-font-weight: bold;
-">%(ylab2)s</div></td>
+        <td><div style="width: 150px; text-align: center; position:absolute;
+         -webkit-transform: rotate(90deg) translateY(65px);
+        font-weight: bold;
+        ">%(ylab2)s</div></td>
 
-</tr></table>
-<script>
-$(function () {
-    var conf = %(conf)s;
-    if (conf.timeTicks) {
-        conf.xaxis.tickFormatter = function (val, axis) {
-            return val.toFixed(0)+conf.timeTicks;
-        }
-    }
-    conf.yaxis.minTickSize = 1;
-    // prevent ticks from having decimals, choose whole numbers instead
-    conf.yaxis.tickDecimals = 0;
-    conf.yaxis.tickFormatter = function (val, axis) {
-            // include the decimal if val isn't a whole number
-            return val === Math.round(val) ? val.toFixed(0) : val.toFixed(1);
-    }
-    if (conf.series.pie) {
-        conf.series.pie.label.formatter = function(label, series){
-            return '<div class=pielabel>'+Math.round(series.percent)+'%%</div>';
-        };
-    }
-    $.plot($("#%(id)s"), %(data)s, conf);
-});
-</script>""" % dict(
-    id=id, w=width, h=height,
-    ylab=ylabel, ylab2=ylabel2,
-    data=json.dumps(data), conf=json.dumps(conf)))
+        </tr></table>
+        <script>
+        $(function () {
+            var conf = %(conf)s;
+            if (conf.timeTicks) {
+                conf.xaxis.tickFormatter = function (val, axis) {
+                    return val.toFixed(0)+conf.timeTicks;
+                }
+            }
+            conf.yaxis.minTickSize = 1;
+            // prevent ticks from having decimals, choose whole numbers instead
+            conf.yaxis.tickDecimals = 0;
+            conf.yaxis.tickFormatter = function (val, axis) {
+                    // include the decimal if val isn't a whole number
+                    return val === Math.round(val) ? val.toFixed(0) : val.toFixed(1);
+            }
+            if (conf.series.pie) {
+                conf.series.pie.label.formatter = function(label, series){
+                    return '<div class=pielabel>'+Math.round(series.percent)+'%%</div>';
+                };
+            }
+            $.plot($("#%(id)s"), %(data)s, conf);
+        });
+        </script>""" % dict(
+            id=id, w=width, h=height,
+            ylab=ylabel, ylab2=ylabel2,
+            data=json.dumps(data), conf=json.dumps(conf)))
 
 
 def _plot(self, data, title, subtitle, bucket_size_days,
