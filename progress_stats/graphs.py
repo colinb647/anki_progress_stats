@@ -62,7 +62,7 @@ def progressGraphs(self):
     bucket_size_days=bucket_size_days, num_buckets=num_buckets,
     day_cutoff_seconds=self.col.sched.dayCutoff, additional_filter=self._revlogLimit())
 
-  result = old(self)
+  result = ""
 
   result += _plot(self,
               stats["learned_cards"],
