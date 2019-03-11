@@ -14,8 +14,10 @@
 
 import json
 import math
-from progress_stats.compute import get_stats
-
+from .compute import get_stats
+import anki.stats
+from anki.hooks import wrap
+from anki.statsbg import bg
 
 colYoung = "#7c7"
 colMature = "#070"
