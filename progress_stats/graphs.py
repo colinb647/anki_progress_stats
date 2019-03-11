@@ -96,6 +96,7 @@ def progressGraphs(self):
 
   return result
 
+anki.stats.CollectionStats.progressGraphs = progressGraphs
 
 def _round_up_max(max_val):
   "Rounds up a maximum value."
