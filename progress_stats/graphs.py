@@ -24,11 +24,27 @@ defaultColor = "#0F0"
 
 _num_graphs = 0
 
+def report_alt(self, type=0):
+    # 0=days, 1=weeks, 2=months
+    self.type = type
+    txt = self.css % bg
+    txt += self._section(self.todayStats())
+    txt += self._section(self.dueGraph())
+    txt += self.repsGraphs()
+    txt += self._section(self.introductionGraph())
+    txt += self._section(self.ivlGraph())
+    txt += self._section(self.hourGraph())
+    txt += self._section(self.easeGraph())
+    txt += self._section(self.cardGraph())
+    txt += self._section(self.progressGraphs())
+    txt += self._section(self.footer())
+    return "<center>%s</center>" % txt
 
-def progressGraphs(*args, **kwargs):
-  self = args[0]
-  old = kwargs['_old']
+anki.stats.CollectionStats.report = \
+  wrap(anki.stats.CollectionStats.report, report_alt, pos="after")
 
+
+def progressGraphs(self):
   if self.type == 0:
     num_buckets = 30
     bucket_size_days = 1
